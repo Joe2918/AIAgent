@@ -7,7 +7,14 @@ import sys
 
 def main():    
     load_dotenv()
-    args = sys.argv[1:]
+
+    verbose = "--verbose" in sys.argv
+    args = []
+    for arg in sys.argv[1:]:
+        if not arg.startswith("--"):
+            args.append(arg)
+
+
     if not args:
         print("AI Code Assistant")
         print('\nUsage: python main.py "your prompt here"')
@@ -23,12 +30,12 @@ def main():
     messages = [
     types.Content(role="user", parts=[types.Part(text=user_prompt)]),
     ]
-    is_verbose = False
-    if args[-1] == "--verbose":
-        print(f"User prompt: {user_prompt}")
-        is_verbose = True
 
-    generate_content(client, messages, is_verbose)
+    if verbose:
+        print(f"User prompt: {user_prompt}")
+
+
+    generate_content(client, messages, verbose)
 
 
 def generate_content(client, messages, verbose):
