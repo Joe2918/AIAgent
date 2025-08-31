@@ -1,5 +1,6 @@
-from functions.get_files_info import get_files_info, get_file_content
-
+from functions.get_files_info import get_files_info
+from functions.write_file import write_file
+from functions.get_file_content import get_file_content
 
 def test():
     result = get_files_info("calculator", ".")
@@ -42,7 +43,15 @@ def test2():
     print(result)
 
  
-    
+def test3():
+    result = write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")
+    print(result)
 
+    result = write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet")
+    print(result)
+
+    result = write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
+    print(result)
+    
 if __name__ == "__main__":
-    test2()
+    test3()
