@@ -1,7 +1,7 @@
 from functions.get_files_info import get_files_info
 from functions.write_file import write_file
 from functions.get_file_content import get_file_content
-
+from functions.run_python import run_python_file
 def test():
     result = get_files_info("calculator", ".")
     print("Result for current directory:")
@@ -52,6 +52,21 @@ def test3():
 
     result = write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
     print(result)
-    
+
+def test4():
+    result = run_python_file("calculator", "main.py") #(should print the calculator's usage instructions)
+    print(result)
+
+    result = run_python_file("calculator", "main.py", ["3 + 5"]) #(should run the calculator... which gives a kinda nasty rendered result)
+    print(result)
+
+    result = run_python_file("calculator", "tests.py")
+    print(result)
+
+    result = run_python_file("calculator", "../main.py") #(this should return an error)
+    print(result)
+
+    result = run_python_file("calculator", "nonexistent.py") #(this should return an error)
+    print(result)
 if __name__ == "__main__":
-    test3()
+    test4()
